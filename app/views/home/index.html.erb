@@ -1,0 +1,49 @@
+<h1>Home#index</h1>
+
+<div>
+    <h3>HTML Templating
+    <h4>Write your HTML shorthand below</h4>
+    
+    <div>
+        <%= form_with url: "/parser", method: :post do |form| %>
+            <div style="width: 40vw;float: left;">
+                <%= form.label :input, "Input:" %>
+            </div>
+            <div style="width: 40vw;float: left;">
+                <%= form.label :documentation, "Documentation:" %>
+            </div>
+
+            <%= form.text_area :input, :size => "150x30", :style => "width: 40vw;resize: none;", :value => @sample %>
+            <%= form.text_area :documentation, :size => "150x30", :style => "width: 40vw;resize: none;", :disabled => true, :value => @docs %>
+            
+            <div>
+                <button type="button" onclick="cleartext()">Clear</button>
+                <%= form.submit "Search" %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('#input').on('keydown', function (e) {
+        if (e.key == 'Tab') {
+            e.preventDefault();
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            // set textarea value to: text before caret + tab + text after caret
+            this.value = this.value.substring(0, start) +
+            "\t" + this.value.substring(end);
+
+            // put caret at right position again
+            this.selectionStart =
+            this.selectionEnd = start + 1;
+        }
+    });
+});
+
+function cleartext() {
+    $('#input').val("");
+}
+</script>
