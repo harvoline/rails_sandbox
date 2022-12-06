@@ -1,2 +1,24 @@
 <h1>Home#parser</h1>
-<p>Find me in app/views/home/parser.html.erb</p>
+
+<div>
+    <h3>HTML Templating
+    <h4>Generated HTML as below</h4>
+    
+    <div>
+        <%= form_with url: "/parser", method: :post do |form| %>
+            <div style="width: 40vw;float: left;">
+                <%= form.label :input, "Input:" %>
+            </div>
+            <div style="width: 40vw;float: left;">
+                <%= form.label :output, "Generated HTML:" %>
+            </div>
+
+            <%= form.text_area :input, :size => "150x30", :style => "width: 40vw;resize: none;", :disabled => true, :value => @input_raw %>
+            <%= form.text_area :output, :size => "150x30", :style => "width: 40vw;resize: none;", :disabled => true, :value => @input_to_html %>
+            
+            <div>
+                <a class="button" href="/">Back</button>
+            </div>
+        <% end %>
+    </div>
+</div>
